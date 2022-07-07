@@ -10,6 +10,7 @@
 
 - Run Postgres Instance on Prisma
 ```bash
+npx prisma migrate dev
 npx prisma studio
 ```
 - Start Server
