@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { TodoDetailsInput } from "../schemas/todo.schema";
 import { TodoUpdateDetailsInput } from "../schemas/todo.update.schema";
-const argon2 = require('argon2');
 
 const prisma = new PrismaClient()
 
@@ -64,7 +63,6 @@ const UpdateTodoData = async (req: Request, res: Response) => {
 
 const DeleteTodoData = async (req: Request, res: Response) => {
     try {
-        console.log(req.body.id)
         const todo: any = await prisma.todo.delete({
             where: {
                 id: req.body.id
