@@ -74,21 +74,19 @@ const UpdateUserData = async (req: Request<{}, {}, UserUpdateDetails>, res: Resp
 
 const DeleteUserData = async (req: Request<{}, {}, UserUpdateDetails>, res: Response) => {
     try {
-        const user: any = await prisma.user.delete({
-            where: {
-                id: req.body.id
-            }, 
-            include: {
-                todos: true
-            }
-        });
-        let todo: any = await prisma.todo.deleteMany({
+        await prisma.todo.deleteMany({
             where: {
                 userId: {
                     equals: req.body.id
                 }
             }
         });
+        const user: any = await prisma.user.delete({
+            where: {
+                id: req.body.id
+            }
+        });
+        delete user.password
         res.json({
             success: true,
             user
